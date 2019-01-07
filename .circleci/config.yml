@@ -10,3 +10,10 @@ workflows:
       # "run" is the name of the job defined in Cypress orb
       - cypress/run:
           spec: dreamhome_spec.js
+    triggers:
+        - schedule:
+            cron: "0 0 * * *"
+            filters:
+              branches:
+                only:
+                  - dream
