@@ -9,7 +9,7 @@ workflows:
       # "cypress" is the name of the imported orb
       # "run" is the name of the job defined in Cypress orb
       - cypress/run:
-          spec: dreamhome_spec.js
+          spec: cypress/integration/dreamhome_spec.js
     triggers:
         - schedule:
             cron: "0 5 * * *"
