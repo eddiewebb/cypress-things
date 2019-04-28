@@ -15,7 +15,7 @@ describe('Enter @ DIY', function() {
 
 		cy.get('#xSecondaryForm > .xActionContainer > #xSubmitContainer > .xButton > span').click()
 
-		cy.get('p.xContentBody').contains('Your entry is being processed')
+		cy.get('.xCopy').contains('Your entry is being processed')
 
 		//class=xButton xCTA xSubmit
 		
@@ -32,7 +32,7 @@ describe('Enter @ DIY', function() {
 
 		cy.get('#xSecondaryForm > .xActionContainer > #xSubmitContainer > .xButton > span').click()
 		
-		cy.get('p.xContentBody').contains('Your entry is being processed')
+		cy.get('.xCopy').contains('Your entry is being processed')
 		//Your entry is being processed
 	})
 })
