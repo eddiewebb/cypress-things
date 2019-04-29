@@ -10,6 +10,10 @@ workflows:
       # "run" is the name of the job defined in Cypress orb
       - cypress/run:
           spec: cypress/integration/smarthome_spec.js
+          post-steps:
+            - store_artifacts:
+                path: /root/project/cypress/screenshots/smarthome_spec.js
+                destination: screenshots
     triggers:
         - schedule:
             cron: "0 5 * * *"
