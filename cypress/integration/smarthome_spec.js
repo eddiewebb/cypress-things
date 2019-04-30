@@ -8,12 +8,22 @@ Cypress.Commands.add('enterSweeps', (sweepUrl, email) => {
 
 	cy.get('#xSecondaryForm > .xActionContainer > #xSubmitContainer > .xButton > span').click()
 
-	cy.get('.xCopy').contains('Your entry is being processed')
+	cy.contains('Your entry is being processed')
 
 });
 
 describe('Enter Sweepstakes', function() {
 
+	it('can enter DIY eaw', function() {
+		cy.server()
+	
+		cy.enterSweeps('https://xd.wayin.com/display/container/dc/838c088b-3688-46d3-8f51-8a28af00f552/entry?source=diy','edward.a.webb@gmail.com')
+	})
+	it('can enter HGTV eaw', function() {
+		cy.server()
+	
+		cy.enterSweeps('https://xd.wayin.com/display/container/dc/630bdfee-d6ef-4d8c-bd66-05ab61b0b43c/entry?source=hgtv','edward.a.webb@gmail.com')
+	})
 	it('can enter DIY', function() {
 		cy.server()
 	
