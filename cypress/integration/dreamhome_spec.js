@@ -1,33 +1,92 @@
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false
+})
+
+Cypress.Commands.add(
+  'iframeLoaded',
+  { prevSubject: 'element' },
+  ($iframe) => {
+    const contentWindow = $iframe.prop('contentWindow')
+    return new Promise(resolve => {
+      if (
+        contentWindow &&
+        contentWindow.document.readyState === 'complete'
+      ) {
+        resolve(contentWindow)
+      } else {
+        $iframe.on('load', () => {
+          resolve(contentWindow)
+        })
+      }
+    })
+  })
+
+Cypress.Commands.add(
+  'getInDocument',
+  { prevSubject: 'document' },
+  (document, selector) => Cypress.$(selector, document)
+);
 
 
 describe('Enter @ DIY', function() {
-
 	it('can enter DIY', function() {
-		cy.server()
+		cy.wrap(['dubblabubbla@gmail.com','ollitech@gmail.com','edward.a.webb@gmail.com']).each( ($li, index, $lis) => {
+			cy.visit('https://www.diynetwork.com/hgtv-dream-home?ocid=direct')
+
+			cy.get('#ngxFrame163663')
+			  .iframeLoaded()
+			  .its('document').as('formcontent')
+
+			cy.get('@formcontent')
+			  .getInDocument('#xReturningUserEmail')
+			  .type($lis[index])
+			cy.get('@formcontent')
+			  .getInDocument('#xCheckUser')
+			  .click()
+
+			cy.wait(5000)
+
+
+			cy.get('#ngxFrame163663')
+			  .iframeLoaded()
+			  .its('document').as('formcontent2')
+			 cy.get('@formcontent2')
+			  .getInDocument('#xSecondaryForm .xSubmit')
+			  .click()
+		})
 	
-		cy.visit('https://xd.wayin.com/display/container/dc/6513f2e6-b5fc-4293-b2ec-fca605b92be8/entry?source=diy')
-		//cy.get('#spout-header-close').click()
 
-		cy.get('input#xReturningUserEmail').type('dubblabubbla@gmail.com')
+	})
+	it('can enter HGTV', function() {		
+		cy.wrap(['dubblabubbla@gmail.com','ollitech@gmail.com','edward.a.webb@gmail.com']).each( ($li, index, $lis) => {
+			cy.visit('https://www.diynetwork.com/hgtv-dream-home?ocid=direct')
 
-		cy.get('#xCheckUser').click()
+			cy.get('#ngxFrame163663')
+			  .iframeLoaded()
+			  .its('document').as('formcontent')
 
-		cy.get('#xSecondaryForm > .xActionContainer > #xSubmitContainer > .xButton > span').click()
+			cy.get('@formcontent')
+			  .getInDocument('#xReturningUserEmail')
+			  .type($lis[index])
+			cy.get('@formcontent')
+			  .getInDocument('#xCheckUser')
+			  .click()
+
+			cy.wait(5000)
+
+
+			cy.get('#ngxFrame163663')
+			  .iframeLoaded()
+			  .its('document').as('formcontent2')
+			 cy.get('@formcontent2')
+			  .getInDocument('#xSecondaryForm .xSubmit')
+			  .click()
+		})
 		
 	})
-	it('can enter HGTV', function() {
-		cy.server()
-	
-		cy.visit('https://xd.wayin.com/display/container/dc/a0069c93-2af3-477e-a255-9c058a82d9f5?source=hgtv')
-		//cy.get('#spout-header-close').click()
 
-		cy.get('input#xReturningUserEmail').type('dubblabubbla@gmail.com')
-
-		cy.get('#xCheckUser').click()
-
-		cy.get('#xSecondaryForm > .xActionContainer > #xSubmitContainer > .xButton > span').click()
-		
-	})
 })
 
 
