@@ -61,9 +61,9 @@ describe('Enter @ DIY', function() {
 	})
 	it('can enter HGTV', function() {		
 		cy.wrap(['dubblabubbla@gmail.com','ollitech@gmail.com','edward.a.webb@gmail.com']).each( ($li, index, $lis) => {
-			cy.visit('https://www.diynetwork.com/hgtv-dream-home?ocid=direct')
+			cy.visit('https://www.hgtv.com/design/hgtv-dream-home/sweepstakes?ocid=direct')
 
-			cy.get('#ngxFrame163663')
+			cy.get('#ngxFrame163659')
 			  .iframeLoaded()
 			  .its('document').as('formcontent')
 
@@ -77,7 +77,7 @@ describe('Enter @ DIY', function() {
 			cy.wait(5000)
 
 
-			cy.get('#ngxFrame163663')
+			cy.get('#ngxFrame163659')
 			  .iframeLoaded()
 			  .its('document').as('formcontent2')
 			 cy.get('@formcontent2')
