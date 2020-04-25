@@ -14,8 +14,8 @@ workflows:
           no-workspace: true
     triggers:
       - schedule:
-          #cron: "23 6 * * *"
+          cron: "23 6 * * *"
           filters:
             branches:
               only:
-                - notarealbranch
+                - master
