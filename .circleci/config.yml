@@ -8,8 +8,8 @@ orbs:
   # import Cypress orb by specifying an exact version
   cypress: cypress-io/cypress@1.29.0
 workflows:
-  when: <<pipeline.parameters.run-schedule>>
   build:
+    when: <<pipeline.parameters.run-schedule>>
     jobs:
       # "cypress" is the name of the imported orb
       # "run" is the name of the job defined in Cypress orb
