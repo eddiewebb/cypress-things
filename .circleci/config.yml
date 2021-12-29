@@ -1,9 +1,14 @@
 # to use orbs, must use version >= 2.1
 version: 2.1
+parameters:
+  run-schedule:
+      type: boolean
+      default: false
 orbs:
   # import Cypress orb by specifying an exact version
-  cypress: cypress-io/cypress@1.13.0
+  cypress: cypress-io/cypress@1.29.0
 workflows:
+  when: <<pipeline.parameters.run-schedule>>
   build:
     jobs:
       # "cypress" is the name of the imported orb
@@ -12,10 +17,3 @@ workflows:
           spec: cypress/integration/dreamhome_spec.js
           store_artifacts: true
           no-workspace: true
-    triggers:
-      - schedule:
-          cron: "23 6 * * *"
-          filters:
-            branches:
-              only:
-                - master
