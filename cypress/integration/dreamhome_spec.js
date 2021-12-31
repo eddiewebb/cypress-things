@@ -48,7 +48,7 @@ describe('Enter Dream Home Sweepstakes', function() {
 				  .getInDocument('#xCheckUser')
 				  .click()
 	
-				cy.wait(5000)
+				cy.wait(500)
 				cy.screenshot('hgtv-' + email)
 	
 				cy.get('#ngxFrame207341')
@@ -57,7 +57,7 @@ describe('Enter Dream Home Sweepstakes', function() {
 				 cy.get('@formcontent2')
 				  .getInDocument('#xSecondaryForm .xSubmit')
 				  .click()
-				  cy.wait(3000)
+				  cy.wait(500)
 				
 				//verify entry
 				  cy.url().should('include', 'thanks')
@@ -82,7 +82,7 @@ describe('Enter Dream Home Sweepstakes', function() {
 			  .getInDocument('#xCheckUser')
 			  .click()
 
-			cy.wait(5000)
+			cy.wait(500)
 			cy.screenshot('food-' + email)
 
 
@@ -93,7 +93,7 @@ describe('Enter Dream Home Sweepstakes', function() {
 			  .getInDocument('#xSecondaryForm .xSubmit')
 			  .click()
 			
-			cy.wait(3000)
+			cy.wait(500)
 			cy.screenshot('food-' + email)
 			
 			//verify entry
