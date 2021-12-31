@@ -31,43 +31,45 @@ Cypress.Commands.add(
 
 
 describe('Enter Dream Home Sweepstakes', function() {
-	
-	it('can enter HGTV', function() {		
-		cy.wrap(['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green']).each( ($li, index, $lis) => {
-			cy.visit('https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes')
-
-			cy.get('#ngxFrame207341')
-			  .iframeLoaded()
-			  .its('document').as('formcontent')
-
-			cy.get('@formcontent')
-			  .getInDocument('#xReturningUserEmail')
-			  .type($lis[index])
-			cy.get('@formcontent')
-			  .getInDocument('#xCheckUser')
-			  .click()
-
-			cy.wait(5000)
-			cy.screenshot('hgtv-' + $lis[index])
-
-			cy.get('#ngxFrame207341')
-			  .iframeLoaded()
-			  .its('document').as('formcontent2')
-			 cy.get('@formcontent2')
-			  .getInDocument('#xSecondaryForm .xSubmit')
-			  .click()
-			  cy.wait(3000)
-			
-			//verify entry
-			  cy.url().should('include', 'thankyou')
-			  cy.screenshot('hgtv-' + $lis[index])
-		})
+	['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green']
+		.forEach( (email)=>{
+			it(`${email} can enter HGTV`, function() {		
 		
-	})
+				cy.visit('https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes')
+	
+				cy.get('#ngxFrame207341')
+				  .iframeLoaded()
+				  .its('document').as('formcontent')
+	
+				cy.get('@formcontent')
+				  .getInDocument('#xReturningUserEmail')
+				  .type(email)
+				cy.get('@formcontent')
+				  .getInDocument('#xCheckUser')
+				  .click()
+	
+				cy.wait(5000)
+				cy.screenshot('hgtv-' + email)
+	
+				cy.get('#ngxFrame207341')
+				  .iframeLoaded()
+				  .its('document').as('formcontent2')
+				 cy.get('@formcontent2')
+				  .getInDocument('#xSecondaryForm .xSubmit')
+				  .click()
+				  cy.wait(3000)
+				
+				//verify entry
+				  cy.url().should('include', 'thanks')
+				  cy.screenshot('hgtv-' + email)
+		
+			
+			})
+	
+	
 
-	it('can enter FoodNetwork', function() {		
-		cy.wrap(['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green']).each( ($li, index, $lis) => {
-			cy.visit('https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes?ocid=direct&xp=sistersite')
+	it(` ${email} can enter FoodNetwork`, function() {		
+		cy.visit('https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes?ocid=direct&xp=sistersite')
 
 			cy.get('#ngxFrame207345')
 			  .iframeLoaded()
@@ -75,13 +77,13 @@ describe('Enter Dream Home Sweepstakes', function() {
 
 			cy.get('@formcontent')
 			  .getInDocument('#xReturningUserEmail')
-			  .type($lis[index])
+			  .type(email)
 			cy.get('@formcontent')
 			  .getInDocument('#xCheckUser')
 			  .click()
 
 			cy.wait(5000)
-			cy.screenshot('food-' + $lis[index])
+			cy.screenshot('food-' + email)
 
 
 			cy.get('#ngxFrame207345')
@@ -92,12 +94,11 @@ describe('Enter Dream Home Sweepstakes', function() {
 			  .click()
 			
 			cy.wait(3000)
-			cy.screenshot('food-' + $lis[index])
+			cy.screenshot('food-' + email)
 			
 			//verify entry
-			  cy.url().should('include', 'thankyou')
+			  cy.url().should('include', 'thanks')
 		})
-		
 	})
 })
 
