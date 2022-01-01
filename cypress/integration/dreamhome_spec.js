@@ -31,7 +31,7 @@ Cypress.Commands.add(
 
 
 describe('Enter Dream Home Sweepstakes', function() {
-	['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green']
+	['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green','bicycle@adirondack.green']
 		.forEach( (email)=>{
 			it(`${email} can enter HGTV`, function() {		
 		
@@ -49,7 +49,6 @@ describe('Enter Dream Home Sweepstakes', function() {
 				  .click()
 	
 				cy.wait(500)
-				cy.screenshot('hgtv-' + email)
 	
 				cy.get('#ngxFrame207341')
 				  .iframeLoaded()
@@ -61,7 +60,6 @@ describe('Enter Dream Home Sweepstakes', function() {
 				
 				//verify entry
 				  cy.url().should('include', 'thanks')
-				  cy.screenshot('hgtv-' + email)
 		
 			
 			})
@@ -83,7 +81,6 @@ describe('Enter Dream Home Sweepstakes', function() {
 			  .click()
 
 			cy.wait(500)
-			cy.screenshot('food-' + email)
 
 
 			cy.get('#ngxFrame207345')
@@ -94,7 +91,6 @@ describe('Enter Dream Home Sweepstakes', function() {
 			  .click()
 			
 			cy.wait(500)
-			cy.screenshot('food-' + email)
 			
 			//verify entry
 			  cy.url().should('include', 'thanks')
