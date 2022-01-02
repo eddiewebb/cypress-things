@@ -48,7 +48,7 @@ describe('Enter Dream Home Sweepstakes', function() {
 				  .getInDocument('#xCheckUser')
 				  .click()
 	
-				cy.wait(500)
+				cy.wait(1500)
 	
 				cy.get('#ngxFrame207341')
 				  .iframeLoaded()
@@ -56,46 +56,44 @@ describe('Enter Dream Home Sweepstakes', function() {
 				 cy.get('@formcontent2')
 				  .getInDocument('#xSecondaryForm .xSubmit')
 				  .click()
-				  cy.wait(500)
+				  cy.wait(1500)
 				
 				//verify entry
 				  cy.url().should('include', 'thanks')
-		
-			
 			})
 	
 	
 
-	it(` ${email} can enter FoodNetwork`, function() {		
-		cy.visit('https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes?ocid=direct&xp=sistersite')
+			it(` ${email} can enter FoodNetwork`, function() {		
+				cy.visit('https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes?ocid=direct&xp=sistersite')
 
-			cy.get('#ngxFrame207345')
-			  .iframeLoaded()
-			  .its('document').as('formcontent')
+				cy.get('#ngxFrame207345')
+				.iframeLoaded()
+				.its('document').as('formcontent')
 
-			cy.get('@formcontent')
-			  .getInDocument('#xReturningUserEmail')
-			  .type(email)
-			cy.get('@formcontent')
-			  .getInDocument('#xCheckUser')
-			  .click()
+				cy.get('@formcontent')
+				.getInDocument('#xReturningUserEmail')
+				.type(email)
+				cy.get('@formcontent')
+				.getInDocument('#xCheckUser')
+				.click()
 
-			cy.wait(500)
+				cy.wait(1500)
 
 
-			cy.get('#ngxFrame207345')
-			  .iframeLoaded()
-			  .its('document').as('formcontent2')
-			 cy.get('@formcontent2')
-			  .getInDocument('#xSecondaryForm .xSubmit')
-			  .click()
-			
-			cy.wait(500)
-			
-			//verify entry
-			  cy.url().should('include', 'thanks')
+				cy.get('#ngxFrame207345')
+				.iframeLoaded()
+				.its('document').as('formcontent2')
+				cy.get('@formcontent2')
+				.getInDocument('#xSecondaryForm .xSubmit')
+				.click()
+				
+				cy.wait(1500)
+				
+				//verify entry
+				cy.url().should('include', 'thanks')
+			})
 		})
-	})
 })
 
 
