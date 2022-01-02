@@ -31,13 +31,17 @@ Cypress.Commands.add(
 
 
 describe('Enter Dream Home Sweepstakes', function() {
-	['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green','bicycle@adirondack.green']
+	[
+		{'name':'hgtv','url':'https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes','iframe':'#ngxFrame207341'},
+		{'name':'foodnetwork','url':'https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes?ocid=direct&xp=sistersite','iframe':'#ngxFrame207345'}
+	].forEach( (sweepstake) => {
+		['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green','bicycle@adirondack.green']
 		.forEach( (email)=>{
-			it(`${email} can enter HGTV`, function() {		
+			it(`${email} can enter ${sweepstake.name}`, function() {		
 		
-				cy.visit('https://www.hgtv.com/sweepstakes/hgtv-dream-home/sweepstakes')
+				cy.visit(sweepstake.url)
 	
-				cy.get('#ngxFrame207341')
+				cy.get(sweepstake.iframe)
 				  .iframeLoaded()
 				  .its('document').as('formcontent')
 	
@@ -48,52 +52,21 @@ describe('Enter Dream Home Sweepstakes', function() {
 				  .getInDocument('#xCheckUser')
 				  .click()
 	
-				cy.wait(1500)
+				cy.wait(2000)
 	
-				cy.get('#ngxFrame207341')
+				cy.get(sweepstake.iframe)
 				  .iframeLoaded()
 				  .its('document').as('formcontent2')
-				 cy.get('@formcontent2')
+				cy.get('@formcontent2')
 				  .getInDocument('#xSecondaryForm .xSubmit')
 				  .click()
-				  cy.wait(1500)
+				cy.wait(1500)
 				
 				//verify entry
 				  cy.url().should('include', 'thanks')
 			})
-	
-	
-
-			it(` ${email} can enter FoodNetwork`, function() {		
-				cy.visit('https://www.foodnetwork.com/sponsored/sweepstakes/hgtv-dream-home-sweepstakes?ocid=direct&xp=sistersite')
-
-				cy.get('#ngxFrame207345')
-				.iframeLoaded()
-				.its('document').as('formcontent')
-
-				cy.get('@formcontent')
-				.getInDocument('#xReturningUserEmail')
-				.type(email)
-				cy.get('@formcontent')
-				.getInDocument('#xCheckUser')
-				.click()
-
-				cy.wait(1500)
-
-
-				cy.get('#ngxFrame207345')
-				.iframeLoaded()
-				.its('document').as('formcontent2')
-				cy.get('@formcontent2')
-				.getInDocument('#xSecondaryForm .xSubmit')
-				.click()
-				
-				cy.wait(1500)
-				
-				//verify entry
-				cy.url().should('include', 'thanks')
-			})
 		})
+	})
 })
 
 
