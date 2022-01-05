@@ -37,7 +37,7 @@ describe('Enter Dream Home Sweepstakes', function() {
 	].forEach( (sweepstake) => {
 		['dubblabubbla@gmail.com','ollitech@gmail.com','edwardawebb@gmail.com','doorknob@adirondack.green','bicycle@adirondack.green']
 		.forEach( (email)=>{
-			it(`${email} can enter ${sweepstake.name}`, function() {		
+			it(`${email} can enter ${sweepstake.name}`, { retries: 3 }, function() {		
 		
 				cy.visit(sweepstake.url)
 	
@@ -52,7 +52,7 @@ describe('Enter Dream Home Sweepstakes', function() {
 				  .getInDocument('#xCheckUser')
 				  .click()
 	
-				cy.wait(2000)
+				cy.wait(3000)
 	
 				cy.get(sweepstake.iframe)
 				  .iframeLoaded()
